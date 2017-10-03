@@ -18,20 +18,20 @@
 	</div>
 
 	<div class="container pra-baixo">
-		<form action="cadastrar-produto" method="post">
+		<form action="alterar-produto" method="get">
 			<table class="table">
 				<tr>
-					<td> Nome</td>
-					<td><input class="form-control" type="text" name="nome" value="<%= list.nome %>"></td>
+					<td> Nome></td>
+					<td><input class="form-control" type="text" name="nome" value="<%= resultado[0].nome %>"></td>
 				</tr>
 				<tr>
 					<td>Preço:</td>
-					<td><input class="form-control" type="text" name="preco" value="<%= lista.preco %>">></td>
+					<td><input class="form-control" type="text" name="preco" value="<%= resultado[0].preco %>"></td>
 				</tr>
 
 				<tr>
 					<td>Descrição:</td>
-					<td><textarea class="form-control" name="descricao"><%= lista.nome %></textarea></td>
+					<td><textarea class="form-control" name="descricao"><%= resultado[0].descricao %></textarea></td>
 				</tr>
 				<tr>
 					<td></td>
