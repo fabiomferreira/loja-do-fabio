@@ -1,8 +1,11 @@
-var app = require ('express')();
+var express = require('express');
+var app = express();
+
 app.set('view engine', 'ejs');
 app.set('views', './app/views');
-app.use(static(__dirname + '/views/produtos/css'));
 
-module.exports = function(){
+module.exports = function(dirname){
+	app.use(express.static(dirname + '/app'));
+console.log(dirname);
 	return app;
 };

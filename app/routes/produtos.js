@@ -5,7 +5,6 @@ module.exports = function(app) {
 
 		connection.query('select * from produtos', function(err, results){
 			res.render('produtos/produtos', {lista:results});
-			res.send(results);
 		});
 
 		connection.end();
