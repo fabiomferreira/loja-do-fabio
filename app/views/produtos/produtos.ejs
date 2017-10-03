@@ -12,7 +12,7 @@
 		<a class="navbar-brand" href="#">Loja do Fabio</a>
 		<ul id="navbarsExampleDefault" class="navbar-nav mr-auto">
 			<li class="nav-item active"><a class="nav-link" href="#">Produtos</a></li>
-			<li class="nav-item"><a class="nav-link" href="cadastrar-produto.html">Cadastrar produto</a></li>
+			<li class="nav-item"><a class="nav-link" href="cadastrar-produto">Cadastrar produto</a></li>
 		</ul>
 
 	</div>
@@ -39,9 +39,16 @@
 						<td><%= lista[i].nome %></td>
 						<td><%= lista[i].preco %></td>
 						<td><%= lista[i].descricao %></td>
-						<td><a class="btn btn-primary" href="#">Alterar</a></td>
 						<td>
-							<form>
+
+						<form action="alterar-produto" method="post">
+							<input type="hidden" name="id" value="<%= lista[i].id %>"/>
+							<button class="btn btn-primary" href="#">Alterar</button></td>
+						</form>
+							
+						<td>
+							<form action="produtos" method="post">
+								<input type="hidden" name="id" value="<%= lista[i].id %>"/>
 								<button class="btn btn-danger" href="#">Excluir</button>
 							</form>
 						</td>

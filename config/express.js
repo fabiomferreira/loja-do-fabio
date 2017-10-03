@@ -6,6 +6,6 @@ app.set('views', './app/views');
 
 module.exports = function(dirname){
 	app.use(express.static(dirname + '/app'));
-console.log(dirname);
+	console.log(dirname);
 	return app;
 };
