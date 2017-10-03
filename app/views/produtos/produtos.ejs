@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- <link rel="stylesheet" type="text/css" href="css/bootstrap-reboot.css"> -->
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/site.css">
+	<title>Loja do Fábio</title>
+</head>
+<body>
+	<div class="header clearfix navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+		<a class="navbar-brand" href="#">Loja do Fabio</a>
+		<ul id="navbarsExampleDefault" class="navbar-nav mr-auto">
+			<li class="nav-item active"><a class="nav-link" href="#">Produtos</a></li>
+			<li class="nav-item"><a class="nav-link" href="cadastrar-produto.html">Cadastrar produto</a></li>
+		</ul>
+
+	</div>
+
+	<div class="container pra-baixo">
+		<div class="jumbotron text-center">
+			<h1 class="display-3">Bem vindo!</h1>
+			<p class="lead">Seja bem-vindo(a) à melhor loja da internet</p>
+		</div>		
+
+		<table class="table table-striped table-responsive">
+			<thead>
+				<tr>
+					<th>Nome do produto</th>
+					<th>Preço</th>	
+					<th>Descrição</th>	
+					<th></th>
+					<th></th>			
+				</tr>
+			</thead>
+			<tbody>
+				<%for(var i = 0; i < lista.length; i++){ %>
+					<tr>
+						<td><%= lista[i].nome %></td>
+						<td><%= lista[i].preco %></td>
+						<td><%= lista[i].descricao %></td>
+						<td><a class="btn btn-primary" href="#">Alterar</a></td>
+						<td>
+							<form>
+								<button class="btn btn-danger" href="#">Excluir</button>
+							</form>
+						</td>
+					</tr>
+				<%}%>				
+			</tbody>
+		</table>
+
+	</div>
+
+</body>
+</html>
