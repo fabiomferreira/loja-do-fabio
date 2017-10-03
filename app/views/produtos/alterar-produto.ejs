@@ -12,7 +12,7 @@
 		<a class="navbar-brand" href="#">Loja do Fabio</a>
 		<ul id="navbarsExampleDefault" class="navbar-nav mr-auto">
 			<li class="nav-item"><a class="nav-link" href="produtos">Produtos</a></li
-			<li class="nav-item active"><a class="nav-link" href="cadastrar-produto">Cadastrar produto</a></li>
+			<li class="nav-item"><a class="nav-link" href="cadastrar-produto">Cadastrar produto</a></li>
 		</ul>
 
 	</div>
@@ -22,16 +22,16 @@
 			<table class="table">
 				<tr>
 					<td> Nome</td>
-					<td><input class="form-control" type="text" name="nome"></td>
+					<td><input class="form-control" type="text" name="nome" value="<%= list.nome %>"></td>
 				</tr>
 				<tr>
 					<td>Preço:</td>
-					<td><input class="form-control" type="text" name="preco"></td>
+					<td><input class="form-control" type="text" name="preco" value="<%= lista.preco %>">></td>
 				</tr>
 
 				<tr>
 					<td>Descrição:</td>
-					<td><textarea class="form-control" name="descricao"></textarea></td>
+					<td><textarea class="form-control" name="descricao"><%= lista.nome %></textarea></td>
 				</tr>
 				<tr>
 					<td></td>

@@ -1,5 +1,5 @@
 var connectionFactory = require('../infra/connectionFactory');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 
 module.exports = function(app) {
 	app.use( bodyParser.json() );       // to support JSON-encoded bodies
@@ -11,17 +11,17 @@ module.exports = function(app) {
 	});
 
 	app.get("/cadastrar-produto", function(req, res){
-		if (req.method.toLowerCase() == 'get') {
-			res.render('produtos/cadastrar-produto');
-		} else if(req.method.toLowerCase() == 'post') {
-			res.render('produtos/produtos');
-			console.log("botão clicado");
-		}
+		res.render('produtos/cadastrar-produto');
 	});
 
-	app.post("/produtos", function(req, res){
+	app.post('/produtos', function(req, res){
 		removeDoBanco(req.body.id);
-		res.redirect('/produtos');
+		res.redirect("/produtos");
+	});
+
+	app.post("/alterar-produto", function(req, res){
+		//res.render('produtos/alterar-produto');
+		populaFormulario(res, req.body.id);
 	});
 
 	app.post("/cadastrar-produto", function(req, res){
@@ -30,7 +30,7 @@ module.exports = function(app) {
 		var preco = req.body.preco;
 		var descricao = req.body.descricao;
 		adicionaNoBanco(nome, preco, descricao);
-		carregaBanco(res);
+		res.redirect("/produtos");
 	});
 }
 
@@ -62,6 +62,15 @@ function removeDoBanco(id) {
 	function(err, results){
 		if (err) throw err;
     	console.log("apagado com sucesso!!");
+	});
+
+	connection.end();
+}
+
+function populaFormulario(res, id) {
+	var connection = connectionFactory();
+	connection.query('select * from produtos where id=' + id, function(err, results){
+	res.render('produtos/alterar-produto', {lista:results});
 	});
 
 	connection.end();
