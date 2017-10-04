@@ -6,40 +6,40 @@ module.exports = function(app) {
 	app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 	  extended: true
 	})); 
+
 	app.get("/produtos", function(req, res){
 		carregaBanco(res);
 	});
-
-	app.get("/cadastrar-produto", function(req, res){
-		res.render('produtos/cadastrar-produto');
-	});
-
 
 	app.post('/produtos', function(req, res){
 		removeDoBanco(req.body.id);
 		res.redirect("/produtos");
 	});
 
-	app.post("/alterar-produto", function(req, res){
-		populaFormulario(res, req.body.id);
+	app.get("/cadastrar-produto", function(req, res){
+		res.render('produtos/cadastrar-produto');
 	});
 
-	app.get('/alterar-produto', function(req, res){
-		var id = req.body.id;
-		var nome = req.body.nome;
-		var preco = req.body.preco;
-		var descricao = req.body.descricao;
-		alteraNoBanco(id, nome, preco, descricao);
-	});
-
-
-	app.post("/cadastrar-produto", function(req, res){
+	app.post("/produto-cadastrado", function(req, res){
 		console.log('Adicionando produto...');
 		var nome = req.body.nome;
 		var preco = req.body.preco;
 		var descricao = req.body.descricao;
 		adicionaNoBanco(nome, preco, descricao);
-		res.redirect("/produtos");
+		carregaBanco(res);
+	});
+
+	app.post("/alterar-produto", function(req, res){
+		populaFormulario(res, req.body.id);
+	});
+
+	app.post('/produto-alterado', function(req, res){
+		var id = req.body.id;
+		var nome = req.body.nome;
+		var preco = req.body.preco;
+		var descricao = req.body.descricao;
+		alteraNoBanco(id, nome, preco, descricao);
+		carregaBanco(res);
 	});
 }
 
@@ -56,7 +56,7 @@ function adicionaNoBanco(nome, preco, descricao) {
 	var connection = connectionFactory();
 	var valores = "'" + nome + "', " + preco + ", '" + descricao + "'";
 	console.log(valores);
-	connection.query('insert into produtos (nome, preco, descricao) values ('+ valores +')',
+	connection.query('insert into produtos (nome, preco, descricao) values ('+ valores +')'+ ";",
 	function(err, results){
 		if (err) throw err;
     	console.log(valores + " inseridos com sucesso!!");
@@ -67,7 +67,7 @@ function adicionaNoBanco(nome, preco, descricao) {
 
 function removeDoBanco(id) {
 	var connection = connectionFactory();
-	connection.query('delete from produtos where id=' + id,
+	connection.query('delete from produtos where id=' + id+ ";",
 	function(err, results){
 		if (err) throw err;
     	console.log("apagado com sucesso!!");
@@ -78,7 +78,7 @@ function removeDoBanco(id) {
 
 function populaFormulario(res, id) {
 	var connection = connectionFactory();
-	connection.query('select * from produtos where id=' + id, function(err, results){
+	connection.query('select * from produtos where id=' + id+ ";", function(err, results){
 		console.log(results);
 		res.render('produtos/alterar-produto', {resultado : results});
 	});
@@ -89,11 +89,11 @@ function populaFormulario(res, id) {
 function alteraNoBanco(id, nome, preco, descricao) {
 	var connection = connectionFactory();
 	qry = "update produtos set nome = '"+ nome +"', preco= " 
-		+ preco + ", descricao = '"+ descricao +"' where id=" + id;
+		+ preco + ", descricao = '"+ descricao +"' where id=" + id + ";";
 	console.log(qry);
 	connection.query(qry, function(err, results){
 		if (err) throw err;
-    	console.log(valores + " inseridos com sucesso!!");
+    	console.log(nome + " inseridos com sucesso!!");
 	});
 
 	connection.end();

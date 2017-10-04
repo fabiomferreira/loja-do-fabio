@@ -18,7 +18,8 @@
 	</div>
 
 	<div class="container pra-baixo">
-		<form action="alterar-produto" method="get">
+		<form action="produto-alterado" method="post">
+			<input type="hidden" name="id" value="<%= resultado[0].id %>" />
 			<table class="table">
 				<tr>
 					<td> Nome></td>
